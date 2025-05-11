@@ -35,7 +35,7 @@ version 2 button configuration (button index not pin number)
 
 1 = copy
 2 = paste
-3 = select all
+3 = select all          
 5 = single click (left)
 6 = double click
 
@@ -72,7 +72,7 @@ https://www.arduino.cc/en/Reference/KeyboardModifiers
 
 const int copy            = 3;
 const int paste           = 4;
-const int selall          = 5;
+const int selall          = 5; //changed to cut
 const int button4         = 8; 
 const int lClick          = 7; 
 const int dblClick        = 6; 
@@ -155,21 +155,21 @@ void checkDebugKeys(void){
    }
 
    if(profile == vb6){
-        if(btnSpecial){/*not defined yet*/}
+        if(btnSpecial){SendCmd('x');}
         if(stepIn)   Keyboard.press(KEY_F8);
         if(stepOver){Keyboard.press(KEY_RIGHT_SHIFT); Keyboard.press(KEY_F8);}
         if(stepOut){ Keyboard.press(KEY_LEFT_CTRL); Keyboard.press(KEY_RIGHT_SHIFT); Keyboard.press(KEY_F8);}
    }
 
    if(profile == vs){
-        if(btnSpecial){/*not defined yet*/}
+        if(btnSpecial){SendCmd('x');}
         if(stepIn)   Keyboard.press(KEY_F11);
         if(stepOver) Keyboard.press(KEY_F10);
         if(stepOut){ Keyboard.press(KEY_RIGHT_SHIFT); Keyboard.press(KEY_F11);}
    }
 
    if(profile == wing){
-        if(btnSpecial){/*not defined yet*/}
+        if(btnSpecial){SendCmd('x');}
         if(stepIn)   Keyboard.press(KEY_F7);
         if(stepOver) Keyboard.press(KEY_F6);
         if(stepOut)  Keyboard.press(KEY_F8);
@@ -187,7 +187,7 @@ void loop() {
 
     checkDebugKeys(); 
     
-    if (digitalRead(selall) == LOW) SendCmd('a');
+    if (digitalRead(selall) == LOW) SendCmd('x');
     if (digitalRead(copy) == LOW)   SendCmd('c');
     if (digitalRead(paste) == LOW)  SendCmd('v');
     
@@ -220,5 +220,3 @@ void loop() {
     
 
 }
-
-
